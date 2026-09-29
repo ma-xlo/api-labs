@@ -1,0 +1,14 @@
+{
+  "database": "lab_refunds_ledger",
+  "features": ["F10.14", "F10.15", "F10.16"],
+  "id": "refunds-ledger",
+  "ports": {
+    "client": 4171,
+    "extra": [4172],
+    "server": 4170
+  },
+  "services": ["postgres", "stripe-mock"],
+  "status": "spec",
+  "tier": 3,
+  "title": "Reembolsos, disputas e razão contábil"
+}

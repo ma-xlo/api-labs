@@ -1,0 +1,41 @@
+{
+  "name": "@lab/http-only-login-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@labs/config": "workspace:*",
+    "@labs/db-kit": "workspace:*",
+    "@labs/http-kit": "workspace:*",
+    "@node-rs/argon2": "catalog:",
+    "cookie-parser": "catalog:",
+    "cors": "catalog:",
+    "drizzle-orm": "catalog:",
+    "express": "catalog:",
+    "pg": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@labs/test-kit": "workspace:*",
+    "@labs/tsconfig": "workspace:*",
+    "@types/cookie-parser": "catalog:",
+    "@types/cors": "catalog:",
+    "@types/express": "catalog:",
+    "@types/node": "catalog:",
+    "@types/pg": "catalog:",
+    "@types/supertest": "catalog:",
+    "drizzle-kit": "catalog:",
+    "supertest": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "database": "lab_rbac_idor",
+  "features": ["F9.7", "F9.8", "F9.9", "F9.30"],
+  "id": "rbac-idor",
+  "ports": {
+    "client": 4051,
+    "extra": [4052],
+    "server": 4050
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 1,
+  "title": "RBAC, autorização por objeto e o laboratório de IDOR"
+}

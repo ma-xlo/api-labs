@@ -1,0 +1,14 @@
+{
+  "database": "lab_http_semantics",
+  "features": ["F1.5", "F1.6", "F2.8", "F2.11"],
+  "id": "http-semantics",
+  "ports": {
+    "client": 4011,
+    "extra": [4012],
+    "server": 4010
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 0,
+  "title": "Semântica de HTTP, na unha"
+}

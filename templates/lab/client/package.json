@@ -1,0 +1,20 @@
+{
+  "name": "@lab/__LAB_NAME__-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite", "build": "vite build", "typecheck": "tsc --noEmit" },
+  "dependencies": {
+    "@labs/ui-kit": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@labs/tsconfig": "workspace:*",
+    "@labs/vite-preset": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

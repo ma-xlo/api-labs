@@ -1,0 +1,14 @@
+{
+  "database": "lab_sse_live_feed",
+  "features": ["F5.1", "F5.2", "F5.3"],
+  "id": "sse-live-feed",
+  "ports": {
+    "client": 4101,
+    "extra": [4102],
+    "server": 4100
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 2,
+  "title": "SSE com retomada, contra polling"
+}

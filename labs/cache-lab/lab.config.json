@@ -1,0 +1,14 @@
+{
+  "database": "lab_cache_lab",
+  "features": ["F6.1", "F6.3", "F6.4", "F6.5"],
+  "id": "cache-lab",
+  "ports": {
+    "client": 4121,
+    "extra": [4122],
+    "server": 4120
+  },
+  "services": ["postgres", "redis"],
+  "status": "spec",
+  "tier": 2,
+  "title": "Cache, invalidação e stampede"
+}

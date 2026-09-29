@@ -1,0 +1,14 @@
+{
+  "database": "lab_stream_export",
+  "features": ["F4.18", "F4.19", "F4.9"],
+  "id": "stream-export",
+  "ports": {
+    "client": 4131,
+    "extra": [4132],
+    "server": 4130
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 2,
+  "title": "Exportação em stream com backpressure"
+}

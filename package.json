@@ -1,0 +1,36 @@
+{
+  "name": "api-labs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.3",
+  "engines": {
+    "node": ">=22.13.1"
+  },
+  "scripts": {
+    "dev": "tsx scripts/dev.mjs",
+    "labs": "tsx scripts/dev.mjs --list",
+    "new": "node scripts/new-lab.mjs",
+    "infra": "node scripts/infra.mjs",
+    "infra:up": "docker compose up -d --wait postgres redis",
+    "infra:down": "docker compose --profile '*' down",
+    "infra:reset": "docker compose --profile '*' down -v && pnpm infra:up",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r --parallel typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "ports:check": "node scripts/ports.mjs check"
+  },
+  "devDependencies": {
+    "@labs/eslint-config": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "^10.11.0",
+    "prettier": "^3.6.2",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

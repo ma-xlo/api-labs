@@ -1,0 +1,14 @@
+{
+  "database": "lab_subscription_billing",
+  "features": ["F10.17", "F10.15", "F10.13"],
+  "id": "subscription-billing",
+  "ports": {
+    "client": 4151,
+    "extra": [4152],
+    "server": 4150
+  },
+  "services": ["postgres", "stripe-mock"],
+  "status": "spec",
+  "tier": 3,
+  "title": "Assinatura, planos e dunning"
+}

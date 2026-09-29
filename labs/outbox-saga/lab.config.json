@@ -1,0 +1,14 @@
+{
+  "database": "lab_outbox_saga",
+  "features": ["F11.6", "F11.9", "F12.14"],
+  "id": "outbox-saga",
+  "ports": {
+    "client": 4191,
+    "extra": [4192],
+    "server": 4190
+  },
+  "services": ["postgres", "rabbitmq"],
+  "status": "spec",
+  "tier": 4,
+  "title": "Outbox transacional e saga"
+}

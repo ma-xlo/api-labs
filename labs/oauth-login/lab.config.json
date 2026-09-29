@@ -1,0 +1,14 @@
+{
+  "database": "lab_oauth_login",
+  "features": ["F9.19", "F9.20", "F9.31"],
+  "id": "oauth-login",
+  "ports": {
+    "client": 4061,
+    "extra": [4062],
+    "server": 4060
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 1,
+  "title": "OAuth 2.1 com PKCE e OIDC"
+}

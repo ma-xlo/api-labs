@@ -1,0 +1,14 @@
+{
+  "database": "lab_payment_checkout",
+  "features": ["F10.6", "F10.7", "F10.8", "F10.12", "F10.18"],
+  "id": "payment-checkout",
+  "ports": {
+    "client": 4141,
+    "extra": [4142],
+    "server": 4140
+  },
+  "services": ["postgres", "stripe-mock"],
+  "status": "spec",
+  "tier": 3,
+  "title": "Checkout com os métodos de pagamento"
+}

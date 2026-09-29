@@ -1,0 +1,14 @@
+{
+  "database": "lab_observability",
+  "features": ["F13.7", "F13.9", "F13.10", "F13.12"],
+  "id": "observability",
+  "ports": {
+    "client": 4201,
+    "extra": [4202],
+    "server": 4200
+  },
+  "services": ["postgres", "jaeger"],
+  "status": "spec",
+  "tier": 4,
+  "title": "Tracing distribuído e os três pilares"
+}

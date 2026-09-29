@@ -1,0 +1,14 @@
+{
+  "database": "lab_oversell_lab",
+  "features": ["F3.8", "F3.9", "F3.10", "F4.10"],
+  "id": "oversell-lab",
+  "ports": {
+    "client": 4111,
+    "extra": [4112],
+    "server": 4110
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 2,
+  "title": "O laboratório de oversell"
+}

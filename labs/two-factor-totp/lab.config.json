@@ -1,0 +1,14 @@
+{
+  "database": "lab_two_factor_totp",
+  "features": ["F9.22", "F9.24"],
+  "id": "two-factor-totp",
+  "ports": {
+    "client": 4071,
+    "extra": [4072],
+    "server": 4070
+  },
+  "services": ["postgres", "mailpit"],
+  "status": "spec",
+  "tier": 1,
+  "title": "Segundo fator com TOTP"
+}

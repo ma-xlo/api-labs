@@ -1,0 +1,14 @@
+{
+  "database": "lab_queue_dlq",
+  "features": ["F12.1", "F12.2", "F12.3", "F12.4"],
+  "id": "queue-dlq",
+  "ports": {
+    "client": 4211,
+    "extra": [4212],
+    "server": 4210
+  },
+  "services": ["postgres", "rabbitmq"],
+  "status": "spec",
+  "tier": 4,
+  "title": "Broker, consumidor correto e DLQ"
+}

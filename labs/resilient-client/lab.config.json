@@ -1,0 +1,14 @@
+{
+  "database": "lab_resilient_client",
+  "features": ["F10.1", "F10.2", "F10.3", "F14.1", "F14.4"],
+  "id": "resilient-client",
+  "ports": {
+    "client": 4181,
+    "extra": [4182],
+    "server": 4180
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 3,
+  "title": "Cliente HTTP resiliente e circuit breaker"
+}

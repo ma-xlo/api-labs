@@ -1,0 +1,14 @@
+{
+  "database": "lab_error_taxonomy",
+  "features": ["F2.1", "F2.2", "F2.3", "F2.4", "F2.12"],
+  "id": "error-taxonomy",
+  "ports": {
+    "client": 4021,
+    "extra": [4022],
+    "server": 4020
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 0,
+  "title": "Contrato de erro e validação na borda"
+}

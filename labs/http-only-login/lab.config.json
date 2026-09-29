@@ -1,0 +1,11 @@
+{
+  "id": "http-only-login",
+  "title": "Login com cookie HttpOnly e sessão no servidor",
+  "tier": 1,
+  "status": "ready",
+  "ports": { "server": 4000, "client": 4001, "extra": [4002] },
+  "services": ["postgres"],
+  "database": "lab_http_only_login",
+  "features": ["F9.1", "F9.2", "F9.4*", "F1.7", "F9.12", "F9.13"],
+  "extraOrigins": { "evil": "http://127.0.0.1:4002/attacker.html" }
+}

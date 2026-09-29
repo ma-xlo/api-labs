@@ -1,0 +1,14 @@
+{
+  "database": "lab_websocket_chat",
+  "features": ["F5.4", "F5.5", "F5.6", "F5.7", "F5.9"],
+  "id": "websocket-chat",
+  "ports": {
+    "client": 4091,
+    "extra": [4092],
+    "server": 4090
+  },
+  "services": ["postgres", "redis"],
+  "status": "spec",
+  "tier": 2,
+  "title": "Chat com WebSocket, presença e reconexão"
+}

@@ -1,0 +1,14 @@
+{
+  "database": "lab_webhook_receiver",
+  "features": ["F10.9", "F10.10", "F10.11", "F8.14"],
+  "id": "webhook-receiver",
+  "ports": {
+    "client": 4161,
+    "extra": [4162],
+    "server": 4160
+  },
+  "services": ["postgres", "redis"],
+  "status": "spec",
+  "tier": 3,
+  "title": "Receptor de webhook e entrega hostil"
+}

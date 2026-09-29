@@ -1,0 +1,93 @@
+# UM compose para todos os labs.
+#
+# Portas deslocadas de propósito (5442, não 5432) para que este repo e o
+# api-study rodem ao mesmo tempo sem colidir.
+#
+# postgres e redis sobem sempre (são baratos). Todo o resto está atrás de
+# profile e só sobe quando um lab declara precisar.
+
+name: api-labs
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: api-labs-postgres
+    restart: unless-stopped
+    ports: ["${POSTGRES_PORT:-5442}:5432"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: postgres
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: api-labs-redis
+    restart: unless-stopped
+    ports: ["${REDIS_PORT:-6389}:6379"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: ["redis_data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: api-labs-mailpit
+    profiles: ["mail"]
+    ports: ["1026:1025", "8026:8025"]
+
+  stripe-mock:
+    image: stripe/stripe-mock:latest
+    container_name: api-labs-stripe-mock
+    profiles: ["payments"]
+    ports: ["12111:12111"]
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    container_name: api-labs-rabbitmq
+    profiles: ["broker"]
+    ports: ["5673:5672", "15673:15672"]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    container_name: api-labs-minio
+    profiles: ["storage"]
+    command: ["server", "/data", "--console-address", ":9011"]
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports: ["9010:9000", "9011:9011"]
+    volumes: ["minio_data:/data"]
+
+  opensearch:
+    image: opensearchproject/opensearch:2
+    container_name: api-labs-opensearch
+    profiles: ["search"]
+    environment:
+      discovery.type: single-node
+      DISABLE_SECURITY_PLUGIN: "true"
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports: ["9201:9200"]
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: api-labs-jaeger
+    profiles: ["obs"]
+    ports: ["16687:16686", "4317:4317", "4318:4318"]
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

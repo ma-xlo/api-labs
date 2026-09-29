@@ -1,0 +1,14 @@
+{
+  "database": "lab_pagination_search",
+  "features": ["F2.6", "F2.7", "F3.6", "F12.10"],
+  "id": "pagination-search",
+  "ports": {
+    "client": 4031,
+    "extra": [4032],
+    "server": 4030
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 0,
+  "title": "Paginação por cursor e busca"
+}

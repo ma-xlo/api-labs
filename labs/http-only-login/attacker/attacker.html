@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR" style="color-scheme: dark">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ofertas Imperdíveis (não é o que parece)</title>
+    <style>
+      body {
+        background: #0f1115;
+        color: #e6e9ef;
+        font:
+          14px/1.6 system-ui,
+          sans-serif;
+        margin: 0;
+        padding: 32px 16px;
+      }
+      main {
+        margin: 0 auto;
+        max-width: 620px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 4px;
+      }
+      .warn {
+        color: #d97706;
+      }
+      .muted {
+        color: #8b93a7;
+      }
+      section {
+        background: #161a22;
+        border: 1px solid #2a2f3a;
+        border-radius: 8px;
+        margin-top: 16px;
+        padding: 16px;
+      }
+      button {
+        background: #dc2626;
+        border: 1px solid #dc2626;
+        border-radius: 6px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 13px;
+        padding: 7px 14px;
+      }
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+      }
+      pre {
+        background: #0f1115;
+        border: 1px solid #2a2f3a;
+        border-radius: 6px;
+        overflow-x: auto;
+        padding: 10px;
+      }
+      #out {
+        margin-top: 12px;
+        white-space: pre-wrap;
+      }
+      .ok {
+        color: #16a34a;
+      }
+      .bad {
+        color: #dc2626;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 class="warn">Site atacante</h1>
+      <p class="muted">
+        Servido em <code>127.0.0.1:4002</code> — um <strong>site</strong> diferente de
+        <code>localhost:4001</code>. Para cookies, site é o domínio registrável e ignora a porta;
+        entre duas portas de <code>localhost</code> o <code>SameSite</code> nunca seria exercitado,
+        e um teste de CSRF montado lá passaria sem testar nada.
+      </p>
+
+      <section>
+        <h2 style="font-size: 15px; margin: 0 0 8px">1 · Formulário cross-site</h2>
+        <p class="muted" style="margin-top: 0">
+          Um <code>&lt;form&gt;</code> não precisa de CORS: o navegador envia a requisição e só
+          esconde a resposta. É por isso que CORS sozinho não é defesa contra CSRF.
+        </p>
+        <form action="http://localhost:4000/auth/logout-all" method="POST" target="sink">
+          <button type="submit">Deslogar a vítima de todos os dispositivos</button>
+        </form>
+        <iframe name="sink" style="display: none"></iframe>
+      </section>
+
+      <section>
+        <h2 style="font-size: 15px; margin: 0 0 8px">2 · fetch com credenciais</h2>
+        <p class="muted" style="margin-top: 0">
+          Aqui o CORS entra em jogo. Se o servidor não listar esta origem, o navegador bloqueia
+          antes mesmo de a resposta chegar ao JavaScript.
+        </p>
+        <button onclick="attack()">Disparar fetch cross-site</button>
+        <div id="out" class="muted">—</div>
+      </section>
+
+      <section>
+        <h2 style="font-size: 15px; margin: 0 0 8px">3 · Prove que a defesa é que segura</h2>
+        <p class="muted" style="margin-top: 0">
+          Com as defesas ligadas, os dois ataques acima falham. Agora desligue-as e repita:
+        </p>
+        <pre>CSRF_MODE=off CHECK_ORIGIN=false pnpm dev http-only-login</pre>
+        <p class="muted">
+          Se o ataque passar a funcionar, você provou qual mecanismo estava segurando a porta. Se
+          continuar falhando, alguma outra coisa estava barrando — e vale descobrir o quê.
+        </p>
+      </section>
+    </main>
+
+    <script>
+      async function attack() {
+        const out = document.getElementById("out");
+        out.className = "muted";
+        out.textContent = "disparando…";
+        try {
+          const res = await fetch("http://localhost:4000/auth/logout-all", {
+            credentials: "include",
+            method: "POST",
+          });
+          out.className = res.ok ? "bad" : "ok";
+          out.textContent = res.ok
+            ? `ATAQUE FUNCIONOU — HTTP ${res.status}. A vítima foi deslogada.`
+            : `bloqueado — HTTP ${res.status}. A defesa segurou.`;
+        } catch (err) {
+          out.className = "ok";
+          out.textContent =
+            "bloqueado pelo navegador antes de chegar ao servidor (CORS).\n" +
+            String(err) +
+            "\n\nAbra o console: o erro de CORS aparece lá, nunca no objeto de erro do fetch.";
+        }
+      }
+    </script>
+  </body>
+</html>

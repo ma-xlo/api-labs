@@ -1,0 +1,14 @@
+{
+  "database": "lab_jwt_vs_session",
+  "features": ["F9.3", "F9.5", "F9.6"],
+  "id": "jwt-vs-session",
+  "ports": {
+    "client": 4041,
+    "extra": [4042],
+    "server": 4040
+  },
+  "services": ["postgres"],
+  "status": "spec",
+  "tier": 1,
+  "title": "JWT contra sessão, com os ataques"
+}
