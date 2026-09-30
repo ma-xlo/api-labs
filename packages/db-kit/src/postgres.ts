@@ -3,6 +3,7 @@ import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { existsSync } from "node:fs";
 import pg from "pg";
 
 /**
@@ -92,6 +93,11 @@ export async function dropDatabase(url: string, name: string): Promise<void> {
  * precisam migrar um database efêmero sem spawnar processo.
  */
 export async function runMigrations(url: string, migrationsFolder: string): Promise<void> {
+  // Lab recém-criado ainda não rodou `db:generate`. O migrator do Drizzle faz
+  // readdir na pasta e lança ENOENT — pasta ausente aqui significa "nada a
+  // aplicar", não erro.
+  if (!existsSync(migrationsFolder)) return;
+
   const pool = createPool(url, { max: 1 });
   try {
     await migrate(drizzle({ client: pool }), { migrationsFolder });
